@@ -8,4 +8,5 @@ function [Labyrinth] = parse_labyrinth(file_path)
       Labyrinth(i,j) = fscanf(in, "%d", 1);
     endfor
   endfor
+  fclose(in);
 endfunction

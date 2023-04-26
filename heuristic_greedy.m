@@ -5,33 +5,26 @@ function [path] = heuristic_greedy(start_position, probabilities, Adj)
   visited(1, 1) = start_position;
   j = 2;
   index_vizitati = 2;
-  while isempty(path) != 1
+  while rows(path)
     position = path(rows(path),1); % iau ultimul nod din path
     
-    if position == 10
+    if position == columns(Adj) - 1
       break;      
     endif
     
-    k = 1; %presupun ca n am niciun nod nevizitat
     dif_zero = nnz(Adj(position,1:columns(Adj) -1)); %cate noduri am
     x = find(Adj(position,1:columns(Adj) -1)); %vector care returneaza idexii nodurilor
-    for i = 1 : dif_zero
-      if ismember(x(i), visited) == 0 %inseamna ca am nod nevizitat
-        vecini(k, 1) = x(i); %retin numerele nodurilor
-        k++;
-      endif
-    endfor 
+   vecini = setdiff(x, visited); %retin numerele nodurilor nevizitate
+   k = length(vecini);
     
-     if k == 1 %nu mai am nod nevizitat
+     if k == 0 %nu mai am nod nevizitat
       path = path(1:end-1,1); %sterge ultimul element 
       j--;
      endif
      
-     if k > 1 %am noduri nevizitate
-       for i = 1:k-1
-         index_probabilitati(i, 1) = probabilities(vecini(i,1), 1);
-       endfor
-       neigh = find(probabilities == max(index_probabilitati));
+     if k > 0 %am noduri nevizitate
+       %retin vecinul nevizitat cu probabilitatea cea mai mare
+       neigh = find(probabilities == max(probabilities(vecini, 1))); 
        visited(1, index_vizitati) = neigh;
        path(j, 1) = neigh;
        index_vizitati++;

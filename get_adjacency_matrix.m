@@ -3,7 +3,8 @@ function [Adj] = get_adjacency_matrix(Labyrinth)
   m = rows(Labyrinth);
   n = columns(Labyrinth);
   
-  Adj = zeros(m * n + 2);
+  Adj = sparse(m, n);
+%  Adj = zeros(m * n + 2);
   contor = 1;
   
   for i = 1 : m
@@ -46,4 +47,5 @@ function [Adj] = get_adjacency_matrix(Labyrinth)
   
     Adj(m * n + 2, m * n + 2) = 1;
     Adj(m * n + 1, m * n + 1) = 1;
+
 endfunction

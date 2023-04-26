@@ -1,6 +1,6 @@
 function [x, err, steps] = perform_iterative(G, c, x0, tol, max_steps)
   
-  steps = 1;
+  steps = 0;
   x = zeros(rows(G), 1);
   
   while steps <= max_steps

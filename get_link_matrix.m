@@ -1,5 +1,6 @@
 function [Link] = get_link_matrix(Labyrinth)
-
+  
+ 
   Link = get_adjacency_matrix(Labyrinth);
   m = rows(Link);
   n = columns(Link);
